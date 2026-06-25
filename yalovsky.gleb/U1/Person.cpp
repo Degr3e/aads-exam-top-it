@@ -96,6 +96,11 @@ namespace yalovsky
 
   void printPersons(std::ostream& out, const Array< Person >& persons)
   {
+    if (persons.size == 0)
+    {
+      out << '\n';
+      return;
+    }
     for (size_t i = 0; i < persons.size; ++i)
     {
       out << persons.data[i].id << ' ' << persons.data[i].info << '\n';
