@@ -58,6 +58,7 @@ namespace yalovsky
       return false;
     }
   }
+
   void readPersons(std::istream& in, Array< Person >& persons, size_t& accepted, size_t& ignored)
   {
     accepted = 0;
@@ -86,6 +87,14 @@ namespace yalovsky
       const Person person{id, info};
       pushBack(persons, person);
       ++accepted;
+    }
+  }
+
+  void printPersons(std::ostream& out, const Array< Person >& persons)
+  {
+    for (size_t i = 0; i < persons.size; ++i)
+    {
+      out << persons.data[i].id << ' ' << persons.data[i].info << '\n';
     }
   }
 }
