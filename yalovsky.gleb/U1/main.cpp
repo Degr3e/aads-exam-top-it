@@ -88,7 +88,6 @@ int main(int argc, char** argv)
 
     if (hasOutput)
     {
-      std::cout << "in file " << outputName << '\n';
       std::ofstream output(outputName);
       if (!output.is_open())
       {
@@ -110,7 +109,10 @@ int main(int argc, char** argv)
     return yalovsky::statusOpenError;
   }
 
-  std::cerr << accepted << ' ' << ignored << '\n';
+  if (accepted != 0 || ignored != 0)
+  {
+    std::cerr << accepted << ' ' << ignored << '\n';
+  }
   yalovsky::freeArray(persons);
   return yalovsky::statusOk;
 }
