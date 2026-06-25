@@ -8,8 +8,8 @@
 namespace yalovsky
 {
     const int statusOk = 0;
-    const int statusBadArgs = 1;
-    const int statusOpenError = 2;
+    const int statusBadArgs = 2;
+    const int statusOpenError = 1;
 
     bool startsWith(const std::string& text, const std::string& prefix)
     {
