@@ -31,5 +31,19 @@ namespace yalovsky
       value = result;
       return true;
     }
+
+    bool readInfo(const std::string& line, size_t pos, std::string& info)
+    {
+      while (pos < line.size() && std::isspace(static_cast< unsigned char >(line[pos])))
+      {
+        ++pos;
+      }
+      if (pos == line.size())
+      {
+        return false;
+      }
+      info = line.substr(pos);
+      return true;
+    }
   }
 }
