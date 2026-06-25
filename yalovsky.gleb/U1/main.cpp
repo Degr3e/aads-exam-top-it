@@ -8,7 +8,7 @@
 namespace yalovsky
 {
     const int statusOk = 0;
-    const int statusBadArgs = 2;
+    const int statusBadArgs = 1;
     const int statusOpenError = 1;
 
     bool startsWith(const std::string& text, const std::string& prefix)
@@ -109,10 +109,7 @@ int main(int argc, char** argv)
     return yalovsky::statusOpenError;
   }
 
-  if (accepted != 0 || ignored != 0)
-  {
-    std::cerr << accepted << ' ' << ignored << '\n';
-  }
+  std::cerr << accepted << ' ' << ignored << '\n';
   yalovsky::freeArray(persons);
   return yalovsky::statusOk;
 }
