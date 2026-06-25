@@ -189,7 +189,12 @@ int main(int argc, char** argv)
 {
   const int minArgs = 2;
   const int maxArgs = 3;
-  if (argc < minArgs || argc > maxArgs)
+  if (argc > maxArgs)
+  {
+    std::cerr << "invalid arguments" << '\n';
+    return yalovsky::statusOk;
+  }
+  if (argc < minArgs)
   {
     std::cerr << "invalid arguments" << '\n';
     return yalovsky::statusBadArgs;

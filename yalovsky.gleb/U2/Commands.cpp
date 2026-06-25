@@ -70,6 +70,11 @@ namespace yalovsky
 
     void printMeetings(std::ostream& out, const Array< Pair >& meetings)
     {
+      if (meetings.size == 0)
+      {
+        out << '\n';
+        return;
+      }
       for (size_t i = 0; i < meetings.size; ++i)
       {
         out << meetings.data[i].first << ' ' << meetings.data[i].second << '\n';
@@ -90,6 +95,10 @@ namespace yalovsky
         }
       }
       sortArray(ids, detail::lessSize);
+      if (ids.size == 0)
+      {
+        out << '\n';
+      }
       for (size_t i = 0; i < ids.size; ++i)
       {
         out << ids.data[i] << '\n';
@@ -195,6 +204,10 @@ namespace yalovsky
           ++j;
         }
       }
+      if (!hasPrinted)
+      {
+        out << '\n';
+      }
     }
     catch (...)
     {
@@ -219,6 +232,7 @@ namespace yalovsky
     {
       detail::collectMeetings(db, id, meetings);
       sortArray(meetings, detail::lessPair);
+      bool printed = false;
       for (size_t i = 0; i < meetings.size; ++i)
       {
         const size_t duration = meetings.data[i].second;
@@ -226,7 +240,12 @@ namespace yalovsky
         if (keep)
         {
           out << meetings.data[i].first << ' ' << duration << '\n';
+          printed = true;
         }
+      }
+      if (!printed)
+      {
+        out << '\n';
       }
     }
     catch (...)
@@ -240,17 +259,23 @@ namespace yalovsky
 
   bool cmdOutPersons(const Database& db, const std::string& filename)
   {
-    std::ofstream out(filename);
+    std::ofstream out(filename, std::ios::app);
     if (!out.is_open())
     {
       return false;
     }
+    bool printed = false;
     for (size_t i = 0; i < db.persons.size; ++i)
     {
       if (!db.persons.data[i].info.empty())
       {
         out << db.persons.data[i].id << ' ' << db.persons.data[i].info << '\n';
+        printed = true;
       }
+    }
+    if (!printed)
+    {
+      out << '\n';
     }
     return true;
   }
