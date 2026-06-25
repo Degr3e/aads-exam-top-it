@@ -58,4 +58,34 @@ namespace yalovsky
       return false;
     }
   }
+  void readPersons(std::istream& in, Array< Person >& persons, size_t& accepted, size_t& ignored)
+  {
+    accepted = 0;
+    ignored = 0;
+    std::string line;
+    while (std::getline(in, line))
+    {
+      size_t pos = 0;
+      size_t id = 0;
+      if (!detail::readId(line, pos, id))
+      {
+        ++ignored;
+        continue;
+      }
+      std::string info;
+      if (!detail::readInfo(line, pos, info))
+      {
+        ++ignored;
+        continue;
+      }
+      if (detail::containsId(persons, id))
+      {
+        ++ignored;
+        continue;
+      }
+      const Person person{id, info};
+      pushBack(persons, person);
+      ++accepted;
+    }
+  }
 }
